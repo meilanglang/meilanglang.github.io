@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Mei Lang personal academic website: RNA language models, mRNA design, RNA structure prediction, and AI for life science." />
+  <title>Mei Lang | RNA Language Models & AI for Life Science</title>
+  <style>
+    :root {
+      --bg: #f7f8fb;
+      --card: #ffffff;
+      --ink: #111827;
+      --muted: #64748b;
+      --line: #e5e7eb;
+      --blue: #2563eb;
+      --blue-dark: #1e3a8a;
+      --cyan: #38bdf8;
+      --green: #10b981;
+      --soft-blue: rgba(37, 99, 235, 0.08);
+      --shadow: 0 18px 45px rgba(15, 23, 42, 0.08);
+      --radius: 22px;
+      --maxw: 1120px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      color: var(--ink);
+      line-height: 1.62;
+      background:
+        radial-gradient(circle at 12% 8%, rgba(56, 189, 248, 0.18), transparent 28%),
+        radial-gradient(circle at 82% 8%, rgba(37, 99, 235, 0.16), transparent 28%),
+        var(--bg);
+    }
+
+    a {
+      color: var(--blue);
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      backdrop-filter: blur(18px);
+      background: rgba(247, 248, 251, 0.84);
+      border-bottom: 1px solid rgba(229, 231, 235, 0.85);
+    }
+
+    .nav-inner {
+      max-width: var(--maxw);
+      margin: 0 auto;
+      padding: 13px 22px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 18px;
+    }
+
+    .brand {
+      color: var(--ink);
+      font-weight: 850;
+      letter-spacing: -0.035em;
+      font-size: 18px;
+    }
+
+    .nav-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      font-size: 14px;
+    }
+
+    .nav-links a {
+      color: var(--muted);
+      font-weight: 650;
+    }
+
+    .nav-links a:hover {
+      color: var(--blue);
+      text-decoration: none;
+    }
+
+    .wrap {
+      max-width: var(--maxw);
+      margin: 0 auto;
+      padding: 52px 22px 74px;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1.38fr) minmax(280px, 0.62fr);
+      gap: 28px;
+      align-items: stretch;
+    }
+
+    .hero-card,
+    .profile-card,
+    .card,
+    .paper,
+    .timeline-item {
+      background: var(--card);
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow);
+    }
+
+    .hero-card {
+      position: relative;
+      overflow: hidden;
+      border-radius: var(--radius);
+      padding: 40px;
+      background: linear-gradient(135deg, rgba(255,255,255,0.98), rgba(255,255,255,0.82));
+    }
+
+    .hero-card::after {
+      content: "";
+      position: absolute;
+      right: -70px;
+      top: -70px;
+      width: 220px;
+      height: 220px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(37,99,235,0.16), transparent 68%);
+    }
+
+    .kicker {
+      position: relative;
+      z-index: 1;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--blue-dark);
+      background: var(--soft-blue);
+      border: 1px solid rgba(37, 99, 235, 0.14);
+      padding: 7px 11px;
+      border-radius: 999px;
+      font-size: 13px;
+      font-weight: 750;
+      margin-bottom: 16px;
+    }
+
+    .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: var(--green);
+    }
+
+    h1 {
+      position: relative;
+      z-index: 1;
+      margin: 0;
+      font-size: clamp(36px, 6vw, 60px);
+      line-height: 0.98;
+      letter-spacing: -0.065em;
+    }
+
+    .subtitle {
+      position: relative;
+      z-index: 1;
+      margin: 18px 0 0;
+      color: var(--muted);
+      font-size: clamp(16px, 2vw, 19px);
+      max-width: 780px;
+    }
+
+    .cta {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 26px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      border-radius: 999px;
+      padding: 11px 16px;
+      font-size: 14px;
+      font-weight: 750;
+      border: 1px solid var(--line);
+      background: var(--card);
+      color: var(--ink);
+      box-shadow: 0 8px 22px rgba(15, 23, 42, 0.06);
+    }
+
+    .btn.primary {
+      background: var(--ink);
+      color: #fff;
+      border-color: var(--ink);
+    }
+
+    .btn:hover {
+      transform: translateY(-1px);
+      text-decoration: none;
+    }
+
+    .profile-card {
+      border-radius: var(--radius);
+      padding: 28px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .avatar {
+      width: 86px;
+      height: 86px;
+      border-radius: 26px;
+      background: linear-gradient(135deg, rgba(37,99,235,0.96), rgba(56,189,248,0.90));
+      color: white;
+      display: grid;
+      place-items: center;
+      font-size: 28px;
+      font-weight: 900;
+      letter-spacing: -0.04em;
+      margin-bottom: 18px;
+      box-shadow: 0 18px 38px rgba(37, 99, 235, 0.25);
+    }
+
+    .profile-card h2 {
+      margin: 0 0 8px;
+      font-size: 22px;
+      letter-spacing: -0.035em;
+    }
+
+    .profile-card p {
+      margin: 0 0 18px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .small-links {
+      display: grid;
+      gap: 9px;
+      font-size: 14px;
+    }
+
+    section {
+      margin-top: 32px;
+    }
+
+    .section-head {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 18px;
+      margin: 38px 0 14px;
+    }
+
+    .section-head h2 {
+      margin: 0;
+      font-size: 24px;
+      letter-spacing: -0.045em;
+    }
+
+    .section-head p {
+      margin: 0;
+      color: var(--muted);
+      max-width: 560px;
+      font-size: 14px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .grid.two {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .card {
+      border-radius: var(--radius);
+      padding: 22px;
+    }
+
+    .card h3 {
+      margin: 0 0 8px;
+      font-size: 17px;
+      letter-spacing: -0.025em;
+    }
+
+    .card p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .tag-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+      margin-top: 14px;
+    }
+
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      border: 1px solid rgba(37,99,235,0.14);
+      background: rgba(37,99,235,0.065);
+      color: var(--blue-dark);
+      border-radius: 999px;
+      padding: 5px 8px;
+      font-size: 12px;
+      font-weight: 750;
+    }
+
+    .timeline {
+      display: grid;
+      gap: 12px;
+    }
+
+    .timeline-item,
+    .paper {
+      border-radius: 18px;
+      padding: 18px 20px;
+    }
+
+    .timeline-item strong,
+    .paper strong {
+      display: block;
+      letter-spacing: -0.02em;
+      margin-bottom: 4px;
+    }
+
+    .paper a.paper-title {
+      color: var(--ink);
+      font-weight: 750;
+    }
+
+    .paper a.paper-title:hover {
+      color: var(--blue);
+      text-decoration: underline;
+    }
+
+    .timeline-item span,
+    .paper span {
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .note {
+      margin-top: 14px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    footer {
+      margin-top: 42px;
+      padding-top: 22px;
+      border-top: 1px solid var(--line);
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    @media (max-width: 880px) {
+      .hero { grid-template-columns: 1fr; }
+      .grid, .grid.two { grid-template-columns: 1fr; }
+      .section-head { align-items: start; flex-direction: column; }
+      .nav-inner { align-items: start; flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+  <nav class="nav">
+    <div class="nav-inner">
+      <a class="brand" href="#">Mei Lang</a>
+      <div class="nav-links">
+        <a href="#about">About</a>
+        <a href="#research">Research</a>
+        <a href="#experience">Experience</a>
+        <a href="#projects">Projects</a>
+        <a href="#publications">Publications</a>
+        <a href="#contact">Contact</a>
+      </div>
+    </div>
+  </nav>
+
+  <main class="wrap">
+    <section class="hero" id="about">
+      <div class="hero-card">
+        <h1>mRNA design,<br />RNA structure prediction,<br />RNA language model.</h1>
+        <p class="subtitle">
+          I develop RNA and mRNA foundation models for regulatory sequence understanding,
+          structure prediction and AI-guided therapeutic design, with a focus on 3′UTR modeling,
+          codon optimization, RNA–RNA interactions and downstream biological benchmarks.
+        </p>
+        <div class="cta">
+          <a class="btn primary" href="#projects">View projects</a>
+          <a class="btn" href="https://github.com/meilanglang" target="_blank" rel="noopener">GitHub</a>
+          <a class="btn" href="#publications">Publications</a>
+        </div>
+      </div>
+
+      <aside class="profile-card">
+        <div>
+          <h2>Mei Lang</h2>
+          <p>PhD candidate at the University of Macau / Hangzhou Institute of Medicine, Chinese Academy of Sciences.</p>
+        </div>
+        <div class="small-links">
+          <a href="https://github.com/meilanglang" target="_blank" rel="noopener">GitHub profile</a>
+          <a href="https://scholar.google.com/citations?hl=zh-CN&user=RBbhCScAAAAJ" target="_blank" rel="noopener">Google Scholar</a>
+          <a href="#publications">Publications</a>
+          <a href="#contact">Contact options</a>
+        </div>
+      </aside>
+    </section>
+
+    <section id="research">
+      <div class="section-head">
+        <h2>Research focus</h2>
+        <p>Computational RNA biology, large language models and data-driven molecular design.</p>
+      </div>
+
+      <div class="grid">
+        <div class="card">
+          <h3>RNA language modeling</h3>
+          <p>
+            Pretraining sequence and MSA-based RNA models for secondary structure,
+            solvent accessibility and regulatory sequence representation.
+          </p>
+          <div class="tag-row">
+            <span class="tag">RNA-MSM</span><span class="tag">MSA</span><span class="tag">structure</span>
+          </div>
+        </div>
+        <div class="card">
+          <h3>mRNA optimization</h3>
+          <p>
+            Building codon and 3′UTR models for programmable mRNA design,
+            codon optimization and regulatory property prediction.
+          </p>
+          <div class="tag-row">
+            <span class="tag">CodonMamba</span><span class="tag">3UTRESM</span><span class="tag">mRNA</span>
+          </div>
+        </div>
+        <div class="card">
+          <h3>Interaction prediction</h3>
+          <p>
+            Benchmarking RNA–RNA interaction and RNA-protein interaction models
+            across structure-based and CLIP-derived datasets.
+          </p>
+          <div class="tag-row">
+            <span class="tag">SPOT-RNAc</span><span class="tag">RBP</span><span class="tag">benchmark</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="experience">
+      <div class="section-head">
+        <h2>Experience and education</h2>
+        <p>Academic background and research experience.</p>
+      </div>
+
+      <div class="grid two">
+        <div class="timeline">
+          <div class="timeline-item">
+            <strong>PhD Candidate · University of Macau / Hangzhou Institute of Medicine, Chinese Academy of Sciences</strong>
+            <span>2024–2028 · AI for life science and RNA/mRNA language modeling.</span>
+          </div>
+          <div class="timeline-item">
+            <strong>Research Assistant · Shenzhen Bay Laboratory</strong>
+            <span>RNA language modeling and RNA structure prediction.</span>
+          </div>
+          <div class="timeline-item">
+            <strong>MSc · Southwest Jiaotong University</strong>
+            <span>Bioinformatic.</span>
+          </div>
+          <div class="timeline-item">
+            <strong>Software Test Engineer · Chinasoft International</strong>
+            <span>After BSc graduation · software testing for router hardware modules in Huawei Wireless Business Unit.</span>
+          </div>
+          <div class="timeline-item">
+            <strong>BSc · Yunnan University</strong>
+            <span>Network Engineering.</span>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>Selected awards</h3>
+          <p>
+            Oral presentation award at the 2025 International Graduates Academic Forum on AI + Innovative Drug Research.
+            Outstanding Employee, Shenzhen Bay Laboratory.
+          </p>
+          <div class="tag-row">
+            <span class="tag">AI + drug research</span><span class="tag">RNA AI</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="projects">
+      <div class="section-head">
+        <h2>Selected projects</h2>
+        <p>Representative projects in RNA foundation models and mRNA design.</p>
+      </div>
+
+      <div class="grid two">
+        <div class="card">
+          <h3>RNA-MSM</h3>
+          <p>
+            Multiple sequence alignment-based RNA language model for RNA structural inference,
+            including secondary structure and solvent accessibility prediction.
+          </p>
+          <div class="tag-row">
+            <span class="tag">NAR 2024</span><span class="tag">RNA LM</span><span class="tag">MSA</span>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>SPOT-RNAc</h3>
+          <p>
+            Benchmarking and prediction framework for RNA–RNA complex interactions using
+            base pairs derived from 3D RNA complex structures.
+          </p>
+          <div class="tag-row">
+            <span class="tag">Bioinformatics 2025</span><span class="tag">RNA complex</span>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>CodonMamba</h3>
+          <p>
+            A bidirectional Mamba-based codon language model for host-adaptive codon optimization
+            and mRNA sequence design.
+          </p>
+          <div class="tag-row">
+            <span class="tag">codon optimization</span><span class="tag">Mamba</span><span class="tag">mRNA</span>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>3UTRESM</h3>
+          <p>
+            A 3′UTR foundation model for mRNA regulatory tasks, including degradation prediction,
+            RNA modification prediction and RNA-protein interaction prediction.
+          </p>
+          <div class="tag-row">
+            <span class="tag">3′UTR</span><span class="tag">RBP</span><span class="tag">stability</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="publications">
+      <div class="section-head">
+        <h2>Publications</h2>
+        <p>Selected publications sorted by publication time from newest to oldest. # indicates first author or equal contribution.</p>
+      </div>
+
+      <div class="timeline">
+        <div class="paper">
+          <strong><a class="paper-title" href="https://www.maxapress.com/article/doi/10.48130/gcomm-0026-0005" target="_blank" rel="noopener">From foundation models to autonomous agents in biology</a></strong>
+          <span>Shenghui Huang, Mei Lang, Zihan Chen, Chenxu Yang, Xiaoying Huang, Zeynab Mohtashaminia, Yuzhong Peng. Genomics Communications, 2026, 3:e006. DOI: 10.48130/gcomm-0026-0005.</span>
+        </div>
+
+        <div class="paper">
+          <strong><a class="paper-title" href="https://doi.org/10.1093/bioinformatics/btaf289" target="_blank" rel="noopener">Benchmarking the methods for predicting base pairs in RNA–RNA interactions</a></strong>
+          <span>Mei Lang#, Thomas Litfin, Ke Chen, Jun Zhan, Yaoqi Zhou. Bioinformatics, 2025, 41(6):btaf289. Citations: 5.</span>
+        </div>
+
+        <div class="paper">
+          <strong><a class="paper-title" href="https://doi.org/10.1093/nar/gkad1031" target="_blank" rel="noopener">Multiple sequence alignment-based RNA language model and its application to structural inference</a></strong>
+          <span>Yikun Zhang#, Mei Lang#, Jiuhong Jiang, Zhiqiang Gao, Fan Xu, Thomas Litfin, Ke Chen, Jaswinder Singh, Xiansong Huang, et al. Nucleic Acids Research, 2024, 52(1):e3–e3. Citations: 137.</span>
+        </div>
+
+        <div class="paper">
+          <strong><a class="paper-title" href="https://doi.org/10.1016/j.tig.2023.10.001" target="_blank" rel="noopener">Predicting RNA structures and functions by artificial intelligence</a></strong>
+          <span>Jun Zhang#, Mei Lang#, Yaoqi Zhou, Yang Zhang. Trends in Genetics, 2024, 40(1):94–107. Citations: 49.</span>
+        </div>
+
+        <div class="paper">
+          <strong><a class="paper-title" href="https://doi.org/10.1101/2023.09.26.559463" target="_blank" rel="noopener">Deep learning models of RNA base-pairing structures generalize to unseen folds and make accurate zero-shot predictions of base-base interactions of RNA complexes</a></strong>
+          <span>Mei Lang#, Thomas Litfin, Ke Chen, Jun Zhan, Yaoqi Zhou. bioRxiv, 2023.09.26.559463. Citations: 1.</span>
+        </div>
+
+        <div class="paper">
+          <strong><a class="paper-title" href="https://doi.org/10.1093/bioinformatics/btab405" target="_blank" rel="noopener">Tfcancer: a manually curated database of transcription factors associated with human cancers</a></strong>
+          <span>Qianwen Huang, Ziyi Tan, Yuting Li, Wei Wang, Mei Lang, Chao Li, Zhi Guo. Bioinformatics, 2021, 37(22):4288–4290. Citations: 8.</span>
+        </div>
+
+        <div class="paper">
+          <strong><a class="paper-title" href="https://doi.org/10.1093/pcmedi/pbab006" target="_blank" rel="noopener">EnhFFL: a database of enhancer mediated feed-forward loops for human and mouse</a></strong>
+          <span>Rui Kang, Ziyi Tan, Mei Lang, Lijin Jin, Yuting Zhang, Yusen Zhang, Tianyun Guo, Zhi Guo. Precision Clinical Medicine, 2021, 4(2):129–135. Citations: 10.</span>
+        </div>
+      </div>
+
+      <p class="note">
+        Full citation list: <a href="https://scholar.google.com/citations?hl=zh-CN&user=RBbhCScAAAAJ" target="_blank" rel="noopener">Google Scholar profile</a>.
+      </p>
+    </section>
+
+    <section id="contact">
+      <div class="section-head">
+        <h2>Contact</h2>
+        <p>Academic background and research experience.</p>
+      </div>
+
+      <div class="card">
+        <p>
+          GitHub: <a href="https://github.com/meilanglang" target="_blank" rel="noopener">github.com/meilanglang</a><br />
+          Google Scholar: <a href="https://scholar.google.com/citations?hl=zh-CN&user=RBbhCScAAAAJ" target="_blank" rel="noopener">Mei Lang</a><br />
+          Website: <a href="https://meilanglang.github.io" target="_blank" rel="noopener">meilanglang.github.io</a><br />
+          Email: <a href="mailto:yc48617@connect.um.edu.mo">yc48617@connect.um.edu.mo</a>
+        </p>
+      </div>
+    </section>
+
+    <footer>
+      <span>© <span id="year"></span> Mei Lang. All rights reserved.</span>
+      <span>Built with GitHub Pages.</span>
+    </footer>
+  </main>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
